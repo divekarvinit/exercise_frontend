@@ -2,29 +2,29 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {Image} from '../models/image';
-import {Images} from '../mock-carousel';
 import { GlobalConstant } from "../global-constant";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarouselService {
+  //  Initialise URL for REST API
   getImagesUrl : string = this.globalConstant.baseUrl +'/api/Exercise';
+  
   private messageSource = new BehaviorSubject(null);
   currentMessage = this.messageSource.asObservable();
 
-  images = Images;
   private messageSource2 = new BehaviorSubject(null);
   currentMessage2 = this.messageSource2.asObservable();
 
   constructor(private http : HttpClient, private globalConstant :GlobalConstant ) { }
 
-  change2(message: string) {
-    this.messageSource.next(message)
+  publishToCarousel1(imageId: string) {
+    this.messageSource.next(imageId)
   }
 
-  change1(message : string){
-    this.messageSource2.next(message);
+  publishToCarousel2(imageId : string){
+    this.messageSource2.next(imageId);
   }
 
   getImages() : Observable<any>{

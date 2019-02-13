@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CarouselService} from '../services/carousel.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import {Images} from '../mock-carousel';
 import {Input} from '@angular/core';
 import { Image } from "src/app/models/image";
 @Component({
@@ -21,7 +20,10 @@ export class FirstCarouselComponent implements OnInit {
 
 
   ngOnInit() {
+    // Get images from the rest api
     this.getImages();
+
+    // Subscribe to changes in the carousel 2 image
     this.carouselService.currentMessage.subscribe(message => this.carousel2Id = message); 
   }
 
@@ -33,11 +35,20 @@ export class FirstCarouselComponent implements OnInit {
   }
   
   onSlide(event, caro){
+
+    // Get current index
     const imageIndex = parseInt(event.current.replace("slideId_", ""), 10);
+
+    //Get current image id
     let imageId = this.images[imageIndex].id;
+
+    //  If the current image's id matches with the current image id of second carousel, 
+    //  show previous image
     if(this.carousel2Id == imageId){
       caro.prev();
     }
-    this.carouselService.change1(imageId);
+
+    //  Publish the change of ID to carousel 2.
+    this.carouselService.publishToCarousel2(imageId);
   }
 }
