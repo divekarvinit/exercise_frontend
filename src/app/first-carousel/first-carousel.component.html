@@ -1,0 +1,11 @@
+<ngb-carousel #caro *ngIf="scrollImages" (slide)="onSlide($event, caro)">
+  <ng-template *ngFor="let image of scrollImages; let i = index" ngbSlide [id]="'slideId_' + i">
+    <img [src]="image.bigImgUrl" alt="Random slide"/>
+    <!-- <div class="carousel-caption">
+          <h3>{{image.id}}</h3>
+      </div> -->
+      <div class="carousel-caption">
+          <h3>{{image.id}}</h3>
+      </div>
+  </ng-template>
+</ngb-carousel>

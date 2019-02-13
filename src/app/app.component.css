@@ -1,0 +1,16 @@
+.container{
+          max-width: 1024px;
+          margin: 0 auto;
+      }
+.text{
+    max-width: 600px;
+    display: inline-block;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+.first-carousel{
+    margin-bottom: 20px;
+}
+.second-carousel{
+    margin-top : 20px;
+}
